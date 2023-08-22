@@ -23,16 +23,19 @@ pizzaJson.map((item, index)=>{
         c('.pizzaBig img').src = pizzaJson[key].img;
         c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
         c( '.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
-        c('.pizzaInfo--actualPrice').innerHTML = `R$ 30`;
-        cs('.pizzaInfo--size').forEach((size, sizeIndex)=>{
-            if(sizeIndex == 2) {
-                
-                 size.classList.add('selected');
-            }
-            
-            
-             size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
-            
+        c('.pizzaInfo--actualPrice').innerHTML = `R$ ${pizzaJson[key].price.toFixed(2)}`;
+        cs('.pizzaInfo--size').forEach((size) => {
+            size.addEventListener('click', (e) => {
+                 c('.pizzaInfo--size.selected').classList.remove('selected');
+                size.classList.add('selected');
+        
+                const newSizeKey = size.getAttribute('data-key');
+                const selectedPizza = pizzaJson[modalKey];
+                if(selectedPizza && selectedPizza.sizes[newSizeKey]) {
+                    const newSizePrice = selectedPizza.sizes[newSizeKey];
+                    c('.pizzaInfo--actualPrice').innerHTML = `R$ ${newSizePrice.toFixed(2)}`;
+                }       
+            });
         });
 
         c('.pizzaInfo--qt').innerHTML = modalQt;
@@ -75,12 +78,14 @@ c('.pizzaInfo--qtmais').addEventListener('click',()=>{
     c('.pizzaInfo--qt').innerHTML = modalQt;
 });
 
-cs('.pizzaInfo--size').forEach((size, sizeIndex)=>{
-    size.addEventListener('click',(e)=> {
-        c('.pizzaInfo--size.selected').classList.remove('selected');
+cs('.pizzaInfo--size').forEach((sizes, sizeIndex) => {
+    sizes.addEventListener('click', (e) => {
+        const selectedSize = c('.pizzaInfo--size.selected');
+        if (selectedSize) {
+            selectedSize.classList.remove('selected');
+        }
         e.target.classList.add('selected');
-    })
-   
+    });
 });
 
 c('.pizzaInfo--addButton').addEventListener('click', ()=> {
@@ -172,7 +177,7 @@ c('.pizzaInfo--addButton').addEventListener('click', ()=> {
 
 
 // Evento de clique nas opções de tamanho
-cs('.pizzaInfo--size').forEach((size) => {
+/*cs('.pizzaInfo--size').forEach((size) => {
     size.addEventListener('click', (e) => {
         // c('.pizzaInfo--size.selected').classList.remove('selected');
         size.classList.add('selected');
@@ -189,4 +194,4 @@ cs('.pizzaInfo--size').forEach((size) => {
        
     });
 });
-
+*/
