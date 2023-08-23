@@ -89,9 +89,9 @@ cs('.pizzaInfo--size').forEach((sizes, sizeIndex) => {
 });
 
 c('.pizzaInfo--addButton').addEventListener('click', ()=> {
-    let size = parseInt (c('.pizzaInfo--size.selected').getAttribute('data-key'));
+    let sizes = parseInt (c('.pizzaInfo--size.selected').getAttribute('data-key'));
 
-    let indentifier = pizzaJson[modalKey].id+'@'+size;
+    let indentifier = pizzaJson[modalKey].id+'@'+sizes;
 
     let key = cart.findIndex((item)=> item.indentifier == indentifier);
 
@@ -101,14 +101,27 @@ c('.pizzaInfo--addButton').addEventListener('click', ()=> {
         cart.push({
             indentifier,
             id:pizzaJson[modalKey].id,
-            size,
+            sizes,
             qt:modalQt
         });
     }
     updateCart();
     closeModal();
 
+    c('.menu-openner').addEventListener('click',() => {
+        if(cart.length > 0) {
+            c('aside').style.left = '0';
+        }
+    })
+
+    c('.menu-closer').addEventListener('click', ()=> {
+        c('aside').style.left = '100vw';
+    })
+
     function updateCart() {
+
+        c('.menu-openner span').innerHTML = cart.length;
+
         if(cart.length > 0) {
             c('aside').classList.add('show');
             c('.cart').innerHTML = '';
@@ -120,10 +133,10 @@ c('.pizzaInfo--addButton').addEventListener('click', ()=> {
             for(let i in cart) {
                 let pizzaItem = pizzaJson.find((item)=>item.id == cart[i].id);
                 subtotal += pizzaItem.price * cart[i].qt;
-                let cartItem = c('.cart--item').cloneNode(true);
-
+                let cartItem = c('.models .cart--item').cloneNode(true);
+                
                 let pizzaSizeName;
-                switch(cart[i].size) {
+                switch (cart[i].sizes) {
                     case 0:
                         pizzaSizeName = 'P';
                         break;
@@ -133,7 +146,13 @@ c('.pizzaInfo--addButton').addEventListener('click', ()=> {
                     case 2:
                         pizzaSizeName = 'G';
                         break;
+                    default:
+                        pizzaSizeName = 'Tamanho Desconhecido';
+                        break;
+                        
                 }
+                
+
                 let pizzaName = `${pizzaItem.name} (${pizzaSizeName})`;
                 cartItem.querySelector('img').src = pizzaItem.img;
                 cartItem.querySelector('.cart--item-nome').innerHTML = pizzaName;
@@ -168,6 +187,7 @@ c('.pizzaInfo--addButton').addEventListener('click', ()=> {
 
         }else {
             c('aside').classList.remove('show');
+            c('aside').style.left = '100vw';
         }
     }
 
@@ -175,23 +195,3 @@ c('.pizzaInfo--addButton').addEventListener('click', ()=> {
     
 })
 
-
-// Evento de clique nas opções de tamanho
-/*cs('.pizzaInfo--size').forEach((size) => {
-    size.addEventListener('click', (e) => {
-        // c('.pizzaInfo--size.selected').classList.remove('selected');
-        size.classList.add('selected');
-
-        const newSizeKey = size.getAttribute('data-key');
-        if(newSizeKey == 0){
-            c('.pizzaInfo--actualPrice').innerHTML = 10;
-        } else if (newSizeKey == 1){
-            c('.pizzaInfo--actualPrice').innerHTML = 20;
-        } else if (newSizeKey == 2){
-            c('.pizzaInfo--actualPrice').innerHTML = 30;
-        }
-
-       
-    });
-});
-*/

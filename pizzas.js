@@ -17,9 +17,9 @@ let pizzaJson = [
         img: 'images/pizza.png',
         price: 20.19,
         sizes: {
-            '320g': 10.00,
-            '530g': 15.00,
-            '860g': 20.00
+            0: 10.00,
+            1: 15.00,
+            2: 20.00
         },
         description: 'Descrição da pizza em mais de uma linha muito legal bem interessante'
     },
@@ -29,9 +29,9 @@ let pizzaJson = [
         img: 'images/pizza2.png',
         price: 18.00,
         sizes: {
-            '320g': 18.00,
-            '530g': 23.00,
-            '860g': 28.00
+            0: 18.00,
+            1: 23.00,
+            2: 28.00
         },
         description: 'Descrição da pizza em mais de uma linha muito legal bem interessante'
     },
@@ -41,9 +41,9 @@ let pizzaJson = [
         img: 'images/pizza3.png',
         price: 17.45,
         sizes: {
-            '320g': 17.45,
-            '530g': 22.45,
-            '860g': 27.45
+            0: 17.45,
+            1: 22.45,
+            2: 27.45
         },
         description: 'Descrição da pizza em mais de uma linha muito legal bem interessante'
     },
@@ -54,9 +54,9 @@ let pizzaJson = [
         img: 'images/pizza4.png',
         price: 19.77,
         sizes: {
-            '320g': 17.45,
-            '530g': 22.45,
-            '860g': 27.45
+            0: 17.45,
+            1: 22.45,
+            2: 27.45
         },
         description: 'Descrição da pizza em mais de uma linha muito legal bem interessante'
     },
@@ -67,9 +67,9 @@ let pizzaJson = [
         img: 'images/pizza5.png',
         price: 21.43,
         sizes: {
-            '320g': 17.45,
-            '530g': 22.45,
-            '860g': 27.45
+            0: 17.45,
+            1: 22.45,
+            2: 27.45
         },
         description: 'Descrição da pizza em mais de uma linha muito legal bem interessante'
     },
@@ -80,9 +80,9 @@ let pizzaJson = [
         img: 'images/pizza6.png',
         price: 18.55,
         sizes: {
-            '320g': 17.45,
-            '530g': 22.45,
-            '860g': 27.45
+            0: 17.45,
+            1: 22.45,
+            2: 27.45
         },
         description: 'Descrição da pizza em mais de uma linha muito legal bem interessante'
     },
@@ -93,9 +93,9 @@ let pizzaJson = [
         img: 'images/pizza7.png',
         price: 22.36,
         sizes: {
-            '320g': 17.45,
-            '530g': 22.45,
-            '860g': 27.45
+            0: 17.45,
+            1: 22.45,
+            2: 27.45
         },
         description: 'Descrição da pizza em mais de uma linha muito legal bem interessante'
     }
