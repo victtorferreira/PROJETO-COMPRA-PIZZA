@@ -4,6 +4,31 @@ let modalQt = 1;
 const c = (el)=>document.querySelector(el);
 const cs = (el)=>document.querySelectorAll(el);
 
+function calculatePizzaPrice() {
+    const selectedSize = c('.pizzaInfo--size.selected');
+    if (!selectedSize) {
+        return 0; // Return 0 if no size is selected
+    }
+
+    const newSizeKey = selectedSize.getAttribute('data-key');
+    
+    const selectedPizza = pizzaJson[modalKey];
+
+    
+    if (selectedPizza) {
+        // c('.pizzaInfo--qt').innerHTML = 1
+        let newSizePrice = selectedPizza.sizes[newSizeKey];
+        let totalPrice = newSizePrice * modalQt;
+        
+        
+        return totalPrice
+    }
+    
+}
+
+
+
+
 
 
 pizzaJson.map((item, index)=>{
@@ -24,6 +49,7 @@ pizzaJson.map((item, index)=>{
         c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
         c( '.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
         c('.pizzaInfo--actualPrice').innerHTML = `R$ ${pizzaJson[key].price.toFixed(2)}`;
+       
         cs('.pizzaInfo--size').forEach((size) => {
             size.addEventListener('click', (e) => {
                  c('.pizzaInfo--size.selected').classList.remove('selected');
@@ -34,6 +60,7 @@ pizzaJson.map((item, index)=>{
                 if(selectedPizza && selectedPizza.sizes[newSizeKey]) {
                     const newSizePrice = selectedPizza.sizes[newSizeKey];
                     c('.pizzaInfo--actualPrice').innerHTML = `R$ ${newSizePrice.toFixed(2)}`;
+                    const totalPrice = calculatePizzaPrice();
                 }       
             });
         });
@@ -54,6 +81,7 @@ pizzaJson.map((item, index)=>{
 
 //EVENTOS DO MODAL
 
+
 function closeModal() {
     c('.pizzaWindowArea').style.opacity = 0;
     setTimeout(()=> {
@@ -69,6 +97,8 @@ c('.pizzaInfo--qtmenos').addEventListener('click',()=>{
     if(modalQt > 1) {
         modalQt--;
      c('.pizzaInfo--qt').innerHTML = modalQt;
+     const totalPrice = calculatePizzaPrice();
+     c('.pizzaInfo--actualPrice').innerHTML = totalPrice.toFixed(2);
     }
     
 });
@@ -76,6 +106,8 @@ c('.pizzaInfo--qtmenos').addEventListener('click',()=>{
 c('.pizzaInfo--qtmais').addEventListener('click',()=>{
     modalQt++;
     c('.pizzaInfo--qt').innerHTML = modalQt;
+    const totalPrice = calculatePizzaPrice();
+    c('.pizzaInfo--actualPrice').innerHTML = totalPrice.toFixed(2);
 });
 
 cs('.pizzaInfo--size').forEach((sizes, sizeIndex) => {
@@ -85,6 +117,17 @@ cs('.pizzaInfo--size').forEach((sizes, sizeIndex) => {
             selectedSize.classList.remove('selected');
         }
         e.target.classList.add('selected');
+
+        const newSizeKey = e.target.getAttribute('data-key');
+        const selectedPizza = pizzaJson[modalKey];
+        if (selectedPizza && selectedPizza.sizes[newSizeKey]) {
+            const newSizePrice = selectedPizza.sizes[newSizeKey];
+            const totalPrice = calculatePizzaPrice();
+            c('.pizzaInfo--actualPrice').innerHTML = `R$ ${totalPrice.toFixed(2)}`;
+            
+           // c('.pizzaInfo--totalPrice').innerHTML = `total ${totalPrice.toFixed(2)}`; // Calcula o preço total
+            // Fazer algo com o preço total, como exibi-lo na interface
+        }
     });
 });
 
@@ -117,6 +160,7 @@ c('.pizzaInfo--addButton').addEventListener('click', ()=> {
     c('.menu-closer').addEventListener('click', ()=> {
         c('aside').style.left = '100vw';
     })
+
 
     function updateCart() {
 
