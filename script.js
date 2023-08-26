@@ -98,7 +98,7 @@ c('.pizzaInfo--qtmenos').addEventListener('click',()=>{
         modalQt--;
      c('.pizzaInfo--qt').innerHTML = modalQt;
      const totalPrice = calculatePizzaPrice();
-     c('.pizzaInfo--actualPrice').innerHTML = totalPrice.toFixed(2);
+     c('.pizzaInfo--actualPrice').innerHTML = `R$ ${totalPrice.toFixed(2)}`;
     }
     
 });
@@ -107,7 +107,7 @@ c('.pizzaInfo--qtmais').addEventListener('click',()=>{
     modalQt++;
     c('.pizzaInfo--qt').innerHTML = modalQt;
     const totalPrice = calculatePizzaPrice();
-    c('.pizzaInfo--actualPrice').innerHTML = totalPrice.toFixed(2);
+    c('.pizzaInfo--actualPrice').innerHTML = `R$ ${totalPrice.toFixed(2)}`;
 });
 
 cs('.pizzaInfo--size').forEach((sizes, sizeIndex) => {
